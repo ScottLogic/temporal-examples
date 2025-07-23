@@ -1,0 +1,48 @@
+services:
+  temporal:
+    container_name: temporal
+    image: temporalio/auto-setup
+    environment:
+      DB: postgres12
+      DB_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PWD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_SEEDS: postgresql
+      BIND_ON_IP: 0.0.0.0
+    ports:
+      - 7233:7233
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "tctl", "--address", "127.0.0.1:7233", "cluster", "health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  temporal-ui:
+    container_name: temporal-ui
+    image: temporalio/ui
+    environment:
+      TEMPORAL_ADDRESS: temporal:7233
+      TEMPORAL_CORS_ORIGINS: http://localhost:3000
+      TEMPORAL_UI_PORT: 8233
+    ports:
+      - 8233:8233
+    depends_on:
+      temporal:
+        condition: service_healthy
+
+  postgresql:
+    container_name: postgresql
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+    volumes:
+      - "${POSTGRES_DIR:-./postgres}:/var/lib/postgresql/data:rw"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
