@@ -11,4 +11,16 @@ public class ExampleActivities
         await Task.Delay(2000);
         return $"generic-task-{DateTime.Now}";
     }
+
+    [Activity]
+    public static List<string> GenerateChildWorkflowsName()
+    {
+        int numberOfChildWorkflows = new Random().Next(1, 10);
+        List<string> childWorkflowsInfo = [];
+        for (int index = 0; index < numberOfChildWorkflows; index++)
+        {
+            childWorkflowsInfo.Add($"child-{index}-workflow-{DateTime.Now}");
+        }
+        return childWorkflowsInfo;
+    }
 }
