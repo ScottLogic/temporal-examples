@@ -26,6 +26,6 @@ public class ExampleWorkflow
                 RetryPolicy = retryPolicy,
             }
         );
-        return "All child workflows created and run";
+        return "Workflow has run";
     }
 }
