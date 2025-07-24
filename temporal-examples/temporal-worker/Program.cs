@@ -21,6 +21,7 @@ using var worker = new TemporalWorker(
     new TemporalWorkerOptions(taskQueue: "example")
         .AddAllActivities(activities) // Register activities
         .AddWorkflow<ExampleWorkflow>() // Register workflow
+        .AddWorkflow<ExampleWithChildrenWorkflow>()
 );
 
 Console.WriteLine("Running worker...");
