@@ -1,6 +1,3 @@
-using System;
-using System.Data.Common;
-using Temporalio.Api.TaskQueue.V1;
 using Temporalio.Common;
 using Temporalio.Workflows;
 

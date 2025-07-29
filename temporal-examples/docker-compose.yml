@@ -1,4 +1,15 @@
 services:
+  temporal-worker:
+    image: ${DOCKER_REGISTRY-}temporalworker
+    build:
+      context: .
+      dockerfile: temporal-worker/Dockerfile
+    environment:
+      - Temporal__ClientUrl=temporal:7233
+    depends_on:
+      temporal:
+        condition: service_healthy
+
   temporal:
     container_name: temporal
     image: temporalio/auto-setup
