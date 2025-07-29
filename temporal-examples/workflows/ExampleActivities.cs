@@ -1,4 +1,3 @@
-using System;
 using Temporalio.Activities;
 
 namespace workflows;
