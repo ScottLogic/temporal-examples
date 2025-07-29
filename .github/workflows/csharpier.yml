@@ -23,5 +23,8 @@ jobs:
       - name: Install CSharpier
         run: dotnet tool install --global csharpier
 
+      - name: Restore CSharpier
+        run: dotnet tool restore
+
       - name: Run CSharpier check
         run: dotnet csharpier --check .
