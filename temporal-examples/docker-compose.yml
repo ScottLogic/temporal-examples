@@ -1,4 +1,5 @@
 services:
+
   temporal-worker:
     image: ${DOCKER_REGISTRY-}temporalworker
     build:
@@ -20,8 +21,10 @@ services:
       POSTGRES_PWD: ${POSTGRES_PASSWORD:-postgres}
       POSTGRES_SEEDS: postgresql
       BIND_ON_IP: 0.0.0.0
+      PROMETHEUS_ENDPOINT: 0.0.0.0:8000
     ports:
       - 7233:7233
+      - 8000:8000
     depends_on:
       postgresql:
         condition: service_healthy
@@ -57,3 +60,27 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+        - "9090:9090"
+    volumes:
+        - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+    command:
+        - "--config.file=/etc/prometheus/prometheus.yml"
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+
+volumes:
+  grafana-storage:

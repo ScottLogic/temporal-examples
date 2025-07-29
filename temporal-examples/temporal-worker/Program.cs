@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Temporalio.Client;
+using Temporalio.Runtime;
 using Temporalio.Worker;
 using workflows;
+using Prometheus;
 
 var config = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
