@@ -1,7 +1,6 @@
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Temporalio.Client;
+using workflows;
 
 namespace RestController
 {
@@ -9,15 +8,42 @@ namespace RestController
     [ApiController]
     public class SignalController : ControllerBase
     {
-        [HttpPost]
-        public async Task<ActionResult<string>> PostSignal(string workflowId)
+        private readonly string _temporalUrl;
+
+
+        public SignalController()
         {
-            var client = await TemporalClient.ConnectAsync(new("localhost:7233"));
+            var config = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
+            .AddEnvironmentVariables() // This line enables environment variable overrides
+            .Build();
 
-            var workflowHandle = client.GetWorkflowHandle(workflowId);
-            // await workflowHandle.SignalAsync(wf => wf.ApproveAsync());
+            _temporalUrl = config["Temporal:ClientUrl"] ?? "localhost:7233";
+        }
 
-            return "signals sent";
+
+        [HttpPost("SendSignal")]
+        public async Task<ActionResult<string>> PostSignal(string workflowId, string? name)
+        {
+            var client = await TemporalClient.ConnectAsync(new(_temporalUrl));
+
+            var workflowHandle = client.GetWorkflowHandle<WaitingSignalWorkflow>(workflowId);
+            await workflowHandle.SignalAsync(wf => wf.Continue(name));
+
+            return "Signal sent";
+        }
+
+        [HttpPost("StartWorkflow")]
+        public async Task<ActionResult<string>> StartWorkflowWaitingSignal(string workflowId)
+        {
+            var client = await TemporalClient.ConnectAsync(new(_temporalUrl));
+            // ExecuteWorkflow is not awaited so swagger UI does not wait for the workflow to finish
+            var result = client.ExecuteWorkflowAsync(
+                (WaitingSignalWorkflow wf) => wf.RunAsync(),
+                new(id: workflowId, taskQueue: "example"));
+
+            return $"Workflow started with ID {workflowId}";
         }
     }
 }
