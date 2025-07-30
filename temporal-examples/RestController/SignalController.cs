@@ -10,18 +10,16 @@ namespace RestController
     {
         private readonly string _temporalUrl;
 
-
         public SignalController()
         {
             var config = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
-            .AddEnvironmentVariables() // This line enables environment variable overrides
-            .Build();
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables() // This line enables environment variable overrides
+                .Build();
 
             _temporalUrl = config["Temporal:ClientUrl"] ?? "localhost:7233";
         }
-
 
         [HttpPost("SendSignal")]
         public async Task<ActionResult<string>> PostSignal(string workflowId, string? name)
@@ -41,7 +39,8 @@ namespace RestController
             // ExecuteWorkflow is not awaited so swagger UI does not wait for the workflow to finish
             var result = client.ExecuteWorkflowAsync(
                 (WaitingSignalWorkflow wf) => wf.RunAsync(),
-                new(id: workflowId, taskQueue: "example"));
+                new(id: workflowId, taskQueue: "example")
+            );
 
             return $"Workflow started with ID {workflowId}";
         }

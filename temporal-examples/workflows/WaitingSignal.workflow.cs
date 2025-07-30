@@ -38,7 +38,9 @@ public class WaitingSignalWorkflow
     [WorkflowSignal]
     public async Task Continue(string? name)
     {
-        var message = name is null ? "Signal to continue has been received" : $"Signal to continue has been received by user: {name}";
+        var message = name is null
+            ? "Signal to continue has been received"
+            : $"Signal to continue has been received by user: {name}";
         Workflow.Logger.LogInformation(message);
         _shouldContinue = true;
     }
