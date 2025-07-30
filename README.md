@@ -9,6 +9,6 @@ Both the Temporal service and all worker services expose metrics to Prometheus, 
 settings in `prometheus.yml`. Prometheus can be manually added to Grafana as a data source.
 
 The Prometheus UI can be accessed at [http://localhost:9090/query], and details of the different scraped metrics
-endpoints can be seen at [http://localhost:9090/targets].
+endpoints can be seen at [targets page](http://localhost:9090/targets).
 
 The Grafana UI can be accessed at [http://localhost:3000/login] - Login details are admin/admin.
