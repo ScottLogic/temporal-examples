@@ -10,4 +10,7 @@
     <PackageReference Include="swashbuckle.aspnetcore.annotations" />
     <PackageReference Include="Temporalio" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\workflows\workflows.csproj" />
+  </ItemGroup>
 </Project>
