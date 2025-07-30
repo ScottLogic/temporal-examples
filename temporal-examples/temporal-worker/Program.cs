@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Prometheus;
 using Temporalio.Client;
 using Temporalio.Runtime;
 using Temporalio.Worker;
@@ -42,6 +41,7 @@ using var worker = new TemporalWorker(
         .AddAllActivities(activities)
         .AddWorkflow<ExampleWorkflow>()
         .AddWorkflow<ExampleWithChildrenWorkflow>()
+        .AddWorkflow<WaitingSignalWorkflow>()
 );
 
 Console.WriteLine("Running worker...");
