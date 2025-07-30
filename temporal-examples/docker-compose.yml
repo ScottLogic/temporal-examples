@@ -10,6 +10,8 @@ services:
     depends_on:
       temporal:
         condition: service_healthy
+    ports: 
+      - 9000:9000
 
   temporal:
     container_name: temporal

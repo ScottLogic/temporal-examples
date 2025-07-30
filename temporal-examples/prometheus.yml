@@ -14,3 +14,10 @@ scrape_configs:
           - host.docker.internal:8000
           labels:
             group: 'server-metrics'
+
+    - job_name: 'temporalworkermetrics'
+      static_configs: 
+        - targets: 
+          - host.docker.internal:9000
+          labels: 
+            group: 'worker-metrics'    
