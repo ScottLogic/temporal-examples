@@ -1,0 +1,21 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["host.docker.internal:9090"]
+
+  - job_name: "temporalmetrics"
+    static_configs:
+      - targets:
+          - host.docker.internal:8000
+        labels:
+          group: "server-metrics"
+
+  - job_name: "temporalworkermetrics"
+    static_configs:
+      - targets:
+          - host.docker.internal:9000
+        labels:
+          group: "worker-metrics"

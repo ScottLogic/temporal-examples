@@ -8,6 +8,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "workflows", "workflows\workflows.csproj", "{B4BD5502-D3E4-4984-ABC9-36CF0FC09826}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestController", "RestController\RestController.csproj", "{F0DCD5C9-1FE6-4110-BEA4-8DDE5E7CDE87}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,20 +49,23 @@ Global
 		{B4BD5502-D3E4-4984-ABC9-36CF0FC09826}.Release|x64.Build.0 = Release|Any CPU
 		{B4BD5502-D3E4-4984-ABC9-36CF0FC09826}.Release|x86.ActiveCfg = Release|Any CPU
 		{B4BD5502-D3E4-4984-ABC9-36CF0FC09826}.Release|x86.Build.0 = Release|Any CPU
-		{F0DCD5C9-1FE6-4110-BEA4-8DDE5E7CDE87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F0DCD5C9-1FE6-4110-BEA4-8DDE5E7CDE87}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F0DCD5C9-1FE6-4110-BEA4-8DDE5E7CDE87}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{F0DCD5C9-1FE6-4110-BEA4-8DDE5E7CDE87}.Debug|x64.Build.0 = Debug|Any CPU
-		{F0DCD5C9-1FE6-4110-BEA4-8DDE5E7CDE87}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{F0DCD5C9-1FE6-4110-BEA4-8DDE5E7CDE87}.Debug|x86.Build.0 = Debug|Any CPU
-		{F0DCD5C9-1FE6-4110-BEA4-8DDE5E7CDE87}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F0DCD5C9-1FE6-4110-BEA4-8DDE5E7CDE87}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F0DCD5C9-1FE6-4110-BEA4-8DDE5E7CDE87}.Release|x64.ActiveCfg = Release|Any CPU
-		{F0DCD5C9-1FE6-4110-BEA4-8DDE5E7CDE87}.Release|x64.Build.0 = Release|Any CPU
-		{F0DCD5C9-1FE6-4110-BEA4-8DDE5E7CDE87}.Release|x86.ActiveCfg = Release|Any CPU
-		{F0DCD5C9-1FE6-4110-BEA4-8DDE5E7CDE87}.Release|x86.Build.0 = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|x64.Build.0 = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|x86.Build.0 = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|x64.ActiveCfg = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|x64.Build.0 = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|x86.ActiveCfg = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4607BC2F-A888-46ED-8108-C72C87AED7C9}
 	EndGlobalSection
 EndGlobal
