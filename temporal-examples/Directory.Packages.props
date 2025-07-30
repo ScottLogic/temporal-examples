@@ -4,6 +4,9 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="microsoft.aspnetcore.openapi" Version="9.0.7" />
+    <PackageVersion Include="swashbuckle.aspnetcore" Version="9.0.3" />
+    <PackageVersion Include="swashbuckle.aspnetcore.annotations" Version="9.0.3" />
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="9.0.7" />
     <PackageVersion
       Include="Microsoft.Extensions.Configuration.EnvironmentVariables"
