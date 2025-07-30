@@ -1,1 +1,4 @@
 postgres/*
+
+# Visual Studio
+.vs/
