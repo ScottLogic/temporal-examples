@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Prometheus;
 using Temporalio.Client;
+using Temporalio.Runtime;
 using Temporalio.Worker;
 using workflows;
 
@@ -10,7 +12,18 @@ var config = new ConfigurationBuilder()
     .Build();
 
 var temporalUrl = config["Temporal:ClientUrl"] ?? "localhost:7233";
-var client = await TemporalClient.ConnectAsync(new(temporalUrl));
+
+var runtime = new TemporalRuntime(
+    new()
+    {
+        Telemetry = new()
+        {
+            Metrics = new() { Prometheus = new PrometheusOptions("0.0.0.0:9000") },
+        },
+    }
+);
+
+var client = await TemporalClient.ConnectAsync(new(temporalUrl) { Runtime = runtime });
 
 // Cancellation token to shutdown worker on ctrl+c
 using var tokenSource = new CancellationTokenSource();

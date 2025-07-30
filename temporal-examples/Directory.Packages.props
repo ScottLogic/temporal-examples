@@ -16,6 +16,7 @@
       Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets"
       Version="1.22.1"
     />
+    <PackageVersion Include="prometheus-net" Version="8.2.1" />
     <PackageVersion Include="Temporalio" Version="1.7.0" />
   </ItemGroup>
 </Project>
