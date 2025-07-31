@@ -12,11 +12,17 @@
     <PackageVersion Include="swashbuckle.aspnetcore" Version="9.0.3" />
     <PackageVersion Include="swashbuckle.aspnetcore.annotations" Version="9.0.3" />
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="9.0.7" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="9.0.7" />
+    <PackageVersion
+      Include="Microsoft.Extensions.Configuration.EnvironmentVariables"
+      Version="9.0.7"
+    />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="9.0.7" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.7" />
     <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.7" />
-    <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
+    <PackageVersion
+      Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets"
+      Version="1.22.1"
+    />
     <PackageVersion Include="prometheus-net" Version="8.2.1" />
     <PackageVersion Include="Temporalio" Version="1.7.0" />
     <PackageVersion Include="Temporalio.Extensions.Hosting" Version="1.7.0" />
