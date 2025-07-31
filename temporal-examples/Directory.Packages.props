@@ -4,7 +4,11 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="Autofac" Version="8.3.0" />
+    <PackageVersion Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Hosting" Version="2.3.0" />
     <PackageVersion Include="microsoft.aspnetcore.openapi" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.7" />
     <PackageVersion Include="swashbuckle.aspnetcore" Version="9.0.3" />
     <PackageVersion Include="swashbuckle.aspnetcore.annotations" Version="9.0.3" />
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="9.0.7" />
@@ -21,5 +25,6 @@
     />
     <PackageVersion Include="prometheus-net" Version="8.2.1" />
     <PackageVersion Include="Temporalio" Version="1.7.0" />
+    <PackageVersion Include="Temporalio.Extensions.Hosting" Version="1.7.0" />
   </ItemGroup>
 </Project>
