@@ -44,7 +44,6 @@ namespace TemporalWorker.AutoFac.Modules
                             },
                         }
                     );
-
                 });
 
             var workerBuilder = services
@@ -53,7 +52,6 @@ namespace TemporalWorker.AutoFac.Modules
                 .AddWorkflow<ExampleWorkflow>()
                 .AddWorkflow<ExampleWithChildrenWorkflow>()
                 .AddWorkflow<WaitingSignalWorkflow>();
-
 
             builder.Populate(services);
         }
