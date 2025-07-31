@@ -2,7 +2,6 @@
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Temporalio.Client;
 using Temporalio.Extensions.Hosting;
 using Temporalio.Runtime;
 using workflows;
