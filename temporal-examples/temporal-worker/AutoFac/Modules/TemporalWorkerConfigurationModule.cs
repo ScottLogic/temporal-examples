@@ -44,6 +44,7 @@ namespace TemporalWorker.AutoFac.Modules
                             },
                         }
                     );
+
                 });
 
             var workerBuilder = services
@@ -53,28 +54,6 @@ namespace TemporalWorker.AutoFac.Modules
                 .AddWorkflow<ExampleWithChildrenWorkflow>()
                 .AddWorkflow<WaitingSignalWorkflow>();
 
-            workerBuilder.ConfigureOptions(options =>
-            {
-                if (
-                    int.TryParse(
-                        temporalConfig["MaxConcurrentWorkflowTasks"],
-                        out int maxWorkflowTasks
-                    )
-                )
-                {
-                    options.MaxConcurrentWorkflowTasks = maxWorkflowTasks;
-                }
-
-                if (
-                    int.TryParse(
-                        temporalConfig["MaxConcurrentActivityTasks"],
-                        out int maxActivityTasks
-                    )
-                )
-                {
-                    options.MaxConcurrentActivities = maxActivityTasks;
-                }
-            });
 
             builder.Populate(services);
         }
