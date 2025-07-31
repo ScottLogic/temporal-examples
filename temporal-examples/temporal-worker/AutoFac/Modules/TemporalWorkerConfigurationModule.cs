@@ -1,14 +1,14 @@
-﻿using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Temporalio.Client;
 using Temporalio.Extensions.Hosting;
 using Temporalio.Runtime;
@@ -22,7 +22,8 @@ namespace TemporalWorker.AutoFac.Modules
 
         public TemporalWorkerConfigurationModule(IConfiguration configuration)
         {
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _configuration =
+                configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         protected override void Load(ContainerBuilder builder)
@@ -53,32 +54,45 @@ namespace TemporalWorker.AutoFac.Modules
                     );
                 });
 
-            var workerBuilder = services.AddHostedTemporalWorker(taskQueue)
+            var workerBuilder = services
+                .AddHostedTemporalWorker(taskQueue)
                 .AddScopedActivities<ExampleActivities>()
                 .AddWorkflow<ExampleWorkflow>()
                 .AddWorkflow<ExampleWithChildrenWorkflow>()
                 .AddWorkflow<WaitingSignalWorkflow>();
 
-            workerBuilder.ConfigureOptions(options => {
-            
-                if (int.TryParse(temporalConfig["MaxConcurrentWorkflowTasks"], out int maxWorkflowTasks))
+            workerBuilder.ConfigureOptions(options =>
+            {
+                if (
+                    int.TryParse(
+                        temporalConfig["MaxConcurrentWorkflowTasks"],
+                        out int maxWorkflowTasks
+                    )
+                )
                 {
                     options.MaxConcurrentWorkflowTasks = maxWorkflowTasks;
                 }
 
-                if (int.TryParse(temporalConfig["MaxConcurrentActivityTasks"], out int maxActivityTasks))
+                if (
+                    int.TryParse(
+                        temporalConfig["MaxConcurrentActivityTasks"],
+                        out int maxActivityTasks
+                    )
+                )
                 {
                     options.MaxConcurrentActivities = maxActivityTasks;
                 }
             });
 
             builder.RegisterType<ExampleActivities>().AsSelf().InstancePerLifetimeScope();
-            builder.Register(ctx =>
-            {
-                var options = ctx.Resolve<TemporalClientConnectOptions>();
-                return TemporalClient.CreateLazy(options);
-            })
-            .As<ITemporalClient>().SingleInstance();
+            builder
+                .Register(ctx =>
+                {
+                    var options = ctx.Resolve<TemporalClientConnectOptions>();
+                    return TemporalClient.CreateLazy(options);
+                })
+                .As<ITemporalClient>()
+                .SingleInstance();
 
             builder.Populate(services);
         }
