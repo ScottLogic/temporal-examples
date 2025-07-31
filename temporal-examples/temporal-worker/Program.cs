@@ -1,12 +1,9 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Temporalio.Extensions.Hosting;
 using TemporalWorker.AutoFac.Modules;
-using workflows;
 
 namespace TemporalWorker;
 
