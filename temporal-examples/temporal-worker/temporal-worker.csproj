@@ -13,9 +13,16 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
+    <PackageReference Include="OpenTelemetry" />
+    <PackageReference Include="OpenTelemetry.Exporter.Console" />
     <PackageReference Include="prometheus-net" />
+    <PackageReference Include="Serilog" />
+    <PackageReference Include="Serilog.Extensions.Logging" />
+    <PackageReference Include="Serilog.Sinks.Elasticsearch" />
     <PackageReference Include="Temporalio" />
+    <PackageReference Include="Temporalio.Extensions.OpenTelemetry" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\workflows\workflows.csproj" />

@@ -5,18 +5,21 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="9.0.7" />
-    <PackageVersion
-      Include="Microsoft.Extensions.Configuration.EnvironmentVariables"
-      Version="9.0.7"
-    />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="9.0.7" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="9.0.7" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.7" />
     <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.7" />
-    <PackageVersion
-      Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets"
-      Version="1.22.1"
-    />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
+    <PackageVersion Include="OpenTelemetry" Version="1.12.0" />
+    <PackageVersion Include="OpenTelemetry.Exporter.Console" Version="1.12.0" />
     <PackageVersion Include="prometheus-net" Version="8.2.1" />
+    <PackageVersion Include="Serilog" Version="4.3.0" />
+    <PackageVersion Include="Serilog.Extensions.Logging" Version="9.0.2" />
+    <PackageVersion Include="Serilog.Formatting.Elasticsearch" Version="10.0.0" />
+    <PackageVersion Include="Serilog.Sinks.Elasticsearch" Version="10.0.0" />
     <PackageVersion Include="Temporalio" Version="1.7.0" />
+    <PackageVersion Include="Temporalio.Extensions.OpenTelemetry" Version="1.7.0" />
   </ItemGroup>
 </Project>

@@ -19,7 +19,7 @@ public class ExampleWithChildrenWorkflow
         };
 
         List<string> childNames = await Workflow.ExecuteActivityAsync(
-            () => ExampleActivities.GenerateChildWorkflowsName(),
+            (ExampleActivities a) => a.GenerateChildWorkflowsName(),
             new ActivityOptions
             {
                 StartToCloseTimeout = TimeSpan.FromMinutes(5),

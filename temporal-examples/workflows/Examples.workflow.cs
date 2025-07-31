@@ -19,7 +19,7 @@ public class ExampleWorkflow
         };
 
         string result = await Workflow.ExecuteActivityAsync(
-            () => ExampleActivities.GenericTask(),
+            (ExampleActivities a) => a.GenericTask(),
             new ActivityOptions
             {
                 StartToCloseTimeout = TimeSpan.FromMinutes(5),
