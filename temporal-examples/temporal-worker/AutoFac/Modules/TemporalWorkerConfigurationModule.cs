@@ -77,16 +77,6 @@ namespace TemporalWorker.AutoFac.Modules
                 }
             });
 
-            builder.RegisterType<ExampleActivities>().AsSelf().InstancePerLifetimeScope();
-            builder
-                .Register(ctx =>
-                {
-                    var options = ctx.Resolve<TemporalClientConnectOptions>();
-                    return TemporalClient.CreateLazy(options);
-                })
-                .As<ITemporalClient>()
-                .SingleInstance();
-
             builder.Populate(services);
         }
     }
