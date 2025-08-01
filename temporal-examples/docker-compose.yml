@@ -52,6 +52,8 @@ services:
     entrypoint: ["sleep", "infinity"]
     environment:
       TEMPORAL_ADDRESS: temporal:7233
+    volumes:
+    - ./scripts:/scripts
 
   temporal-ui:
     container_name: temporal-ui
