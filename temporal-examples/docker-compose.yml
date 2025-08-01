@@ -48,7 +48,7 @@ services:
 
   temporal-cli:
     container_name: temporal-cli
-    image: temporalio/temporal:latest  
+    image: temporalio/temporal:latest
     entrypoint: ["sleep", "infinity"]
     environment:
       TEMPORAL_ADDRESS: temporal:7233
