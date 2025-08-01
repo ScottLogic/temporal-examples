@@ -1,6 +1,7 @@
 <Project>
   <PropertyGroup>
-    <!-- Enable central package management, https://learn.microsoft.com/en-us/nuget/consume-packages/Central-Package-Management -->
+    <!-- Enable central package management,
+    https://learn.microsoft.com/en-us/nuget/consume-packages/Central-Package-Management -->
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
@@ -10,6 +11,9 @@
     <PackageVersion Include="microsoft.aspnetcore.openapi" Version="9.0.7" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.7" />
     <PackageVersion Include="Microsoft.Extensions.Logging" Version="9.0.8" />
+    <PackageVersion Include="Serilog" Version="4.3.0" />
+    <PackageVersion Include="Serilog.Extensions.Logging" Version="9.0.2" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />
     <PackageVersion Include="swashbuckle.aspnetcore" Version="9.0.3" />
     <PackageVersion Include="swashbuckle.aspnetcore.annotations" Version="9.0.3" />
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="9.0.7" />

@@ -1,24 +1,36 @@
+using Microsoft.Extensions.Logging;
 using Temporalio.Activities;
 
 namespace workflows;
 
 public class ExampleActivities
 {
-    [Activity]
-    public static async Task<string> GenericTask()
+    private readonly ILogger<ExampleActivities> _logger;
+    public ExampleActivities(ILogger<ExampleActivities> logg)
     {
-        await Task.Delay(2000);
+        _logger = logg;
+    }
+
+    [Activity]
+    public async Task<string> GenericTask()
+    {
+        var duration = 2000;
+        _logger.LogInformation($"Starting delay: {@duration}");
+        await Task.Delay(duration);
+        _logger.LogInformation("Finished delay");
         return $"generic-task-{DateTime.Now}";
     }
 
     [Activity]
-    public static List<string> GenerateChildWorkflowsName()
+    public List<string> GenerateChildWorkflowsName()
     {
         int numberOfChildWorkflows = new Random().Next(1, 10);
         List<string> childWorkflowsInfo = [];
         for (int index = 0; index < numberOfChildWorkflows; index++)
         {
-            childWorkflowsInfo.Add($"child-{index}-workflow-{DateTime.Now}");
+            var name = $"child-{index}-workflow-{DateTime.Now}";
+            _logger.LogInformation($"Creating child workflow {@name}");
+            childWorkflowsInfo.Add(name);
         }
         return childWorkflowsInfo;
     }
