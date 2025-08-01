@@ -8,6 +8,7 @@ namespace workflows;
 public class WaitingSignalWorkflow
 {
     private bool _shouldContinue = false;
+    private TimeSpan _timeout = new(0, 0, 20);
 
     [WorkflowRun]
     public async Task<string> RunAsync()
@@ -20,18 +21,35 @@ public class WaitingSignalWorkflow
             BackoffCoefficient = 2,
             MaximumAttempts = 3,
         };
+        var activityOptions = new ActivityOptions()
+        {
+            StartToCloseTimeout = TimeSpan.FromMinutes(5),
+            RetryPolicy = retryPolicy,
+        };
 
         Workflow.Logger.LogInformation("Waiting for signal to continue");
-        await Workflow.WaitConditionAsync(() => _shouldContinue);
-
-        string result = await Workflow.ExecuteActivityAsync(
-            () => ExampleActivities.GenericTask(),
-            new ActivityOptions
-            {
-                StartToCloseTimeout = TimeSpan.FromMinutes(5),
-                RetryPolicy = retryPolicy,
-            }
+        //var didNotTimeout = await Workflow.WaitConditionAsync(() => _shouldContinue, timeout: _timeout);
+        // This is an experimental feature that allows to name the timer i.e "WaitingForSignal" instead of "WaitConditionAsync".
+        // I left the stable version as well in case we want to revert back to it.
+        var didNotTimeout = await Workflow.WaitConditionWithOptionsAsync(
+            new WaitConditionOptions(() => _shouldContinue, _timeout, "WaitingForSignal")
         );
+
+        if (didNotTimeout)
+        {
+            await Workflow.ExecuteActivityAsync(
+                () => ExampleActivities.TaskTriggeredBySignal(),
+                activityOptions
+            );
+        }
+        else
+        {
+            await Workflow.ExecuteActivityAsync(
+                () => ExampleActivities.TaskTriggeredByTimeout(),
+                activityOptions
+            );
+        }
+
         return "Workflow has run";
     }
 
