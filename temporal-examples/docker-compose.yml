@@ -46,6 +46,15 @@ services:
       timeout: 5s
       retries: 5
 
+  temporal-cli:
+    container_name: temporal-cli
+    image: temporalio/temporal:latest
+    entrypoint: ["sleep", "infinity"]
+    environment:
+      TEMPORAL_ADDRESS: temporal:7233
+    volumes:
+    - ./scripts:/scripts
+
   temporal-ui:
     container_name: temporal-ui
     image: temporalio/ui
