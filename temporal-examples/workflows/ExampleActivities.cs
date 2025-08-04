@@ -22,4 +22,18 @@ public class ExampleActivities
         }
         return childWorkflowsInfo;
     }
+
+    [Activity]
+    public static async Task<string> TaskTriggeredBySignal()
+    {
+        await Task.Delay(2000);
+        return $"task-triggered-by-signal-{DateTime.Now}";
+    }
+
+    [Activity]
+    public static async Task<string> TaskTriggeredByTimeout()
+    {
+        await Task.Delay(2000);
+        return $"task-triggered-by-timeout-{DateTime.Now}";
+    }
 }
