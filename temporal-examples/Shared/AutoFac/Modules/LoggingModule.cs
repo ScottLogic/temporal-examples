@@ -1,7 +1,7 @@
 using Autofac;
 using Microsoft.Extensions.Logging;
 
-namespace TemporalWorker.AutoFac.Modules
+namespace Shared.AutoFac.Modules
 {
     /// <summary>
     /// Autofac module for configuring logging services

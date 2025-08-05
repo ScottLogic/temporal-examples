@@ -3,6 +3,7 @@ using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Shared.AutoFac.Modules;
 using TemporalWorker.AutoFac.Modules;
 
 namespace TemporalWorker;
