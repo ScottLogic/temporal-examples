@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Logging;
 using Temporalio.Activities;
 
-namespace workflows;
+namespace Workflows;
 
 public class ExampleActivities
 {

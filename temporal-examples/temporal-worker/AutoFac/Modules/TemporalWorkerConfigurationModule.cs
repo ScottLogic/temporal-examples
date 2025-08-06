@@ -4,7 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Temporalio.Extensions.Hosting;
 using Temporalio.Runtime;
-using workflows;
+using Workflows;
+
 
 namespace TemporalWorker.AutoFac.Modules
 {
@@ -14,8 +15,7 @@ namespace TemporalWorker.AutoFac.Modules
 
         public TemporalWorkerConfigurationModule(IConfiguration configuration)
         {
-            _configuration =
-                configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _configuration = configuration;
         }
 
         protected override void Load(ContainerBuilder builder)

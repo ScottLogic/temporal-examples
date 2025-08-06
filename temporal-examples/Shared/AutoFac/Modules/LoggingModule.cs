@@ -1,8 +1,11 @@
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Extensions.Logging;
+using Serilog.Formatting.Json;
 
 namespace Shared.AutoFac.Modules
 {
@@ -23,11 +26,14 @@ namespace Shared.AutoFac.Modules
         protected override void Load(ContainerBuilder builder)
         {
             var loggerConfig = new LoggerConfiguration()
+                .Enrich.WithProperty("Environment", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production")
                 .WriteTo.Console(
                     outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
-                .WriteTo.File("logs/log-.txt",
+                .WriteTo.File(
+                    new JsonFormatter(renderMessage: true),
+                    "logs/log-.json",
                     rollingInterval: RollingInterval.Day,
-                    outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}");
+                    shared: true);
 
             var logger = loggerConfig.CreateLogger();
 
@@ -38,6 +44,11 @@ namespace Shared.AutoFac.Modules
             builder.Register<ILoggerFactory>(c => new SerilogLoggerFactory(logger, true))
                 .As<ILoggerFactory>()
                 .SingleInstance();
+
+            var services = new ServiceCollection();
+            services.AddLogging();
+
+            builder.Populate(services);
         }
     }
 }

@@ -2,7 +2,6 @@
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Shared.AutoFac.Modules;
 using TemporalWorker.AutoFac.Modules;
 
@@ -17,10 +16,10 @@ internal class Program
             .ConfigureContainer<ContainerBuilder>(
                 (context, builder) =>
                 {
-                    builder.RegisterModule(new LoggingModule(context.Configuration));
                     builder.RegisterModule(
-                        new TemporalWorkerConfigurationModule(context.Configuration)
-                    );
+           new TemporalWorkerConfigurationModule(context.Configuration)
+       );
+                    builder.RegisterModule(new LoggingModule(context.Configuration));
                 }
             )
             .Build();

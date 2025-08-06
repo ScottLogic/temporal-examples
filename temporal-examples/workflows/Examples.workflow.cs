@@ -1,7 +1,7 @@
 ﻿using Temporalio.Common;
 using Temporalio.Workflows;
 
-namespace workflows;
+namespace Workflows;
 
 [Workflow]
 public class ExampleWorkflow
