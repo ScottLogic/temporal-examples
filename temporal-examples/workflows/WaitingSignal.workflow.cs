@@ -38,14 +38,14 @@ public class WaitingSignalWorkflow
         if (didNotTimeout)
         {
             await Workflow.ExecuteActivityAsync(
-                () => ExampleActivities.TaskTriggeredBySignal(),
+                (ExampleActivities a) => a.TaskTriggeredBySignal(),
                 activityOptions
             );
         }
         else
         {
             await Workflow.ExecuteActivityAsync(
-                () => ExampleActivities.TaskTriggeredByTimeout(),
+                (ExampleActivities a) => a.TaskTriggeredByTimeout(),
                 activityOptions
             );
         }

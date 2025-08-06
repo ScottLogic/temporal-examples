@@ -37,16 +37,22 @@ public class ExampleActivities
     }
 
     [Activity]
-    public static async Task<string> TaskTriggeredBySignal()
+    public async Task<string> TaskTriggeredBySignal()
     {
-        await Task.Delay(2000);
+        var duration = 2000;
+        _logger.LogInformation("Starting delay: {Duration}", duration);
+        await Task.Delay(duration);
+        _logger.LogInformation("Finished delay");
         return $"task-triggered-by-signal-{DateTime.Now}";
     }
 
     [Activity]
-    public static async Task<string> TaskTriggeredByTimeout()
+    public async Task<string> TaskTriggeredByTimeout()
     {
-        await Task.Delay(2000);
+        var duration = 2000;
+        _logger.LogInformation("Starting delay: {Duration}", duration);
+        await Task.Delay(duration);
+        _logger.LogInformation("Finished delay");
         return $"task-triggered-by-timeout-{DateTime.Now}";
     }
 }
