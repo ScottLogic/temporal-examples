@@ -6,6 +6,7 @@ namespace Workflows;
 public class ExampleActivities
 {
     private readonly ILogger<ExampleActivities> _logger;
+
     public ExampleActivities(ILogger<ExampleActivities> logger)
     {
         _logger = logger;

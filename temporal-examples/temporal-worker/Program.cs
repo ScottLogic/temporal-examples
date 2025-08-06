@@ -17,8 +17,8 @@ internal class Program
                 (context, builder) =>
                 {
                     builder.RegisterModule(
-           new TemporalWorkerConfigurationModule(context.Configuration)
-       );
+                        new TemporalWorkerConfigurationModule(context.Configuration)
+                    );
                     builder.RegisterModule(new LoggingModule(context.Configuration));
                 }
             )

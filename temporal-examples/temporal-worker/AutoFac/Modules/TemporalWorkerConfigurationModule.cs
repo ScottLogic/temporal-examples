@@ -6,7 +6,6 @@ using Temporalio.Extensions.Hosting;
 using Temporalio.Runtime;
 using Workflows;
 
-
 namespace TemporalWorker.AutoFac.Modules
 {
     public class TemporalWorkerConfigurationModule : Module

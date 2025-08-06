@@ -16,9 +16,7 @@ namespace Shared.AutoFac.Modules
     {
         private readonly IConfiguration _configuration;
 
-        public LoggingModule(
-            IConfiguration configuration
-        )
+        public LoggingModule(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -26,14 +24,19 @@ namespace Shared.AutoFac.Modules
         protected override void Load(ContainerBuilder builder)
         {
             var loggerConfig = new LoggerConfiguration()
-                .Enrich.WithProperty("Environment", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production")
+                .Enrich.WithProperty(
+                    "Environment",
+                    Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"
+                )
                 .WriteTo.Console(
-                    outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
+                    outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}"
+                )
                 .WriteTo.File(
                     new JsonFormatter(renderMessage: true),
                     "logs/log-.json",
                     rollingInterval: RollingInterval.Day,
-                    shared: true);
+                    shared: true
+                );
 
             var logger = loggerConfig.CreateLogger();
 
@@ -41,7 +44,8 @@ namespace Shared.AutoFac.Modules
 
             builder.RegisterInstance(logger).As<Serilog.ILogger>().SingleInstance();
 
-            builder.Register<ILoggerFactory>(c => new SerilogLoggerFactory(logger, true))
+            builder
+                .Register<ILoggerFactory>(c => new SerilogLoggerFactory(logger, true))
                 .As<ILoggerFactory>()
                 .SingleInstance();
 
