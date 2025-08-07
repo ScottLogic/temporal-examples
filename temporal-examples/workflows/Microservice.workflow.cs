@@ -1,5 +1,6 @@
 using Temporalio.Common;
 using Temporalio.Workflows;
+using Workflows;
 
 namespace workflows;
 
@@ -21,7 +22,7 @@ public class MicroservicesWorkflow
         };
 
         await Workflow.ExecuteActivityAsync(
-            () => ExampleActivities.GenericTask(),
+            (ExampleActivities a) => a.GenericTask(),
             new ActivityOptions
             {
                 StartToCloseTimeout = TimeSpan.FromMinutes(5),
