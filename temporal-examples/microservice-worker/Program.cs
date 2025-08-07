@@ -17,7 +17,7 @@ internal class Program
             .ConfigureContainer<ContainerBuilder>(
                 (context, builder) =>
                 {
-                    builder.RegisterModule(new LoggingModule(LogLevel.Information));
+                    builder.RegisterModule(new LoggingModule(context.Configuration));
                     builder.RegisterModule(
                         new TemporalWorkerConfigurationModule(context.Configuration)
                     );

@@ -2,7 +2,7 @@ using Temporalio.Common;
 using Temporalio.Workflows;
 using Workflows;
 
-namespace workflows;
+namespace Workflows;
 
 [Workflow]
 public class MicroservicesWorkflow

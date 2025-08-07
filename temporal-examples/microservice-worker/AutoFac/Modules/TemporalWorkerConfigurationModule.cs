@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Temporalio.Extensions.Hosting;
 using Temporalio.Runtime;
-using workflows;
+using Workflows;
 
 namespace TemporalWorker.AutoFac.Modules
 {
