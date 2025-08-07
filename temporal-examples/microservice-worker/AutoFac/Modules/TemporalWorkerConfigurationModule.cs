@@ -26,7 +26,8 @@ namespace TemporalWorker.AutoFac.Modules
             var temporalConfig = _configuration.GetSection("Temporal");
             var clientHost = temporalConfig["ClientTargetHost"] ?? "host.docker.internal:7233";
             var clientNamespace = temporalConfig["Namespace"] ?? "default";
-            var taskQueue = temporalConfig["TaskQueue"] ?? "example";
+            // This is using a different queue to the other worker
+            var taskQueue = temporalConfig["TaskQueue"] ?? "microservice-queue";
 
             services
                 .AddTemporalClient(clientHost, clientNamespace)
@@ -39,7 +40,7 @@ namespace TemporalWorker.AutoFac.Modules
                             {
                                 Metrics = new()
                                 {
-                                    Prometheus = new PrometheusOptions("0.0.0.0:9000"),
+                                    Prometheus = new PrometheusOptions("0.0.0.0:9001"),
                                 },
                             },
                         }
@@ -48,11 +49,7 @@ namespace TemporalWorker.AutoFac.Modules
 
             var workerBuilder = services
                 .AddHostedTemporalWorker(taskQueue)
-                .AddScopedActivities<ExampleActivities>()
-                .AddWorkflow<ExampleWorkflow>()
-                .AddWorkflow<ExampleWithChildrenWorkflow>()
-                .AddWorkflow<WaitingSignalWorkflow>()
-                .AddWorkflow<MicroservicesWorkflow>();
+                .AddScopedActivities<MicroserviceActivities>();
 
             builder.Populate(services);
         }
