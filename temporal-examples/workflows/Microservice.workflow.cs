@@ -40,7 +40,7 @@ public class MicroservicesWorkflow
         );
 
         await Workflow.ExecuteActivityAsync(
-            () => MicroserviceActivities.TransitionToApproved(),
+            () => MicroserviceActivities.CreateSecondaryCosts(),
             new ActivityOptions
             {
                 StartToCloseTimeout = TimeSpan.FromMinutes(5),
@@ -58,7 +58,7 @@ public class MicroservicesWorkflow
                 TaskQueue = "microservice-queue",
             }
         );
-        ;
+
         var transitionToApproved = Workflow.ExecuteActivityAsync(
             () => MicroserviceActivities.TransitionToApproved(),
             new ActivityOptions

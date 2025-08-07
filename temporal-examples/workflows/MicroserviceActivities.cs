@@ -24,19 +24,19 @@ public class MicroserviceActivities
     public static async Task<Result<string>> CreateSecondaryCosts()
     {
         await Task.Delay(3000);
-        return new Result<string> { value = "Created" };
+        return new Result<string> { Value = "Created" };
     }
 
     [Activity]
     public static async Task<Result<string>> UpdateUpstream()
     {
         await Task.Delay(5000);
-        return new Result<string> { value = "updated" };
+        return new Result<string> { Value = "updated" };
     }
 
     public record Result<T>
     {
-        public required T value;
-        public readonly string? errorMessage;
+        public required T Value;
+        public string? ErrorMessage { get; init; }
     }
 }
