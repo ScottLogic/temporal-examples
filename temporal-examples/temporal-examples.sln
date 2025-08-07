@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shared", "shared\shared.csproj", "{A56077C7-F0E1-45FF-BBED-5B20D598F46E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{A56077C7-F0E1-45FF-BBED-5B20D598F46E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "microservice-worker", "microservice-worker\microservice-worker.csproj", "{1813C751-9AC5-4A62-8628-21DF7868334F}"
 EndProject

@@ -13,7 +13,7 @@ WORKDIR /src
 COPY ["Directory.Packages.props", "."]
 COPY ["microservice-worker/microservice-worker.csproj", "microservice-worker/"]
 COPY ["workflows/workflows.csproj", "workflows/"]
-COPY ["shared/shared.csproj", "shared/"]
+COPY ["Shared/Shared.csproj", "Shared/"]
 RUN dotnet restore "./microservice-worker/microservice-worker.csproj"
 COPY . .
 WORKDIR "/src/microservice-worker"

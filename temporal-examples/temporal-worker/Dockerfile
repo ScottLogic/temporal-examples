@@ -13,7 +13,7 @@ WORKDIR /src
 COPY ["Directory.Packages.props", "."]
 COPY ["temporal-worker/temporal-worker.csproj", "temporal-worker/"]
 COPY ["workflows/workflows.csproj", "workflows/"]
-COPY ["shared/shared.csproj", "shared/"]
+COPY ["Shared/Shared.csproj", "Shared/"]
 RUN dotnet restore "./temporal-worker/temporal-worker.csproj"
 COPY . .
 WORKDIR "/src/temporal-worker"
