@@ -33,10 +33,6 @@ endpoints can be seen at [targets page](http://localhost:9090/targets).
 
 The Grafana UI can be accessed at [Grafana login](http://localhost:3000/login) - Login details are admin/admin.
 
-## People to talk to about Temporal in Scott Logic
-
-Silas Benson, Roger Stillito, Fanis Vlachos, James Strachan, Matt Griffin, Wayne Eastaugh, Dan Moorhouse, Yotaka Blowers, Matt Cadden, David Bell all worked in a large project involving data pipelines using Temporal.
-
 ## License
 
 See License.md
