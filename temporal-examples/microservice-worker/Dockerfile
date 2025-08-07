@@ -11,21 +11,21 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Directory.Packages.props", "."]
-COPY ["temporal-worker/temporal-worker.csproj", "temporal-worker/"]
+COPY ["microservice-worker/microservice-worker.csproj", "microservice-worker/"]
 COPY ["workflows/workflows.csproj", "workflows/"]
 COPY ["shared/shared.csproj", "shared/"]
-RUN dotnet restore "./temporal-worker/temporal-worker.csproj"
+RUN dotnet restore "./microservice-worker/microservice-worker.csproj"
 COPY . .
-WORKDIR "/src/temporal-worker"
-RUN dotnet build "./temporal-worker.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/microservice-worker"
+RUN dotnet build "./microservice-worker.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./temporal-worker.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./microservice-worker.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "temporal-worker.dll"]
+ENTRYPOINT ["dotnet", "microservice-worker.dll"]

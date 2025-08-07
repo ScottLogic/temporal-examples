@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "temporal-worker": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
