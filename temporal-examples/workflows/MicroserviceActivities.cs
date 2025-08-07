@@ -1,6 +1,6 @@
 using Temporalio.Activities;
 
-namespace workflows;
+namespace Workflows;
 
 // These activities can be calling an external microservice
 // Arguably these could be added to the generic activities file but this does

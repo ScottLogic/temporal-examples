@@ -1,39 +1,58 @@
+using Microsoft.Extensions.Logging;
 using Temporalio.Activities;
 
-namespace workflows;
+namespace Workflows;
 
 public class ExampleActivities
 {
-    [Activity]
-    public static async Task<string> GenericTask()
+    private readonly ILogger<ExampleActivities> _logger;
+
+    public ExampleActivities(ILogger<ExampleActivities> logger)
     {
-        await Task.Delay(2000);
+        _logger = logger;
+    }
+
+    [Activity]
+    public async Task<string> GenericTask()
+    {
+        var duration = 2000;
+        _logger.LogInformation("Starting delay: {Duration}", duration);
+        await Task.Delay(duration);
+        _logger.LogInformation("Finished delay");
         return $"generic-task-{DateTime.Now}";
     }
 
     [Activity]
-    public static List<string> GenerateChildWorkflowsName()
+    public List<string> GenerateChildWorkflowsName()
     {
         int numberOfChildWorkflows = new Random().Next(1, 10);
         List<string> childWorkflowsInfo = [];
         for (int index = 0; index < numberOfChildWorkflows; index++)
         {
-            childWorkflowsInfo.Add($"child-{index}-workflow-{DateTime.Now}");
+            var name = $"child-{index}-workflow-{DateTime.Now}";
+            _logger.LogInformation("Creating child workflow {Name}", name);
+            childWorkflowsInfo.Add(name);
         }
         return childWorkflowsInfo;
     }
 
     [Activity]
-    public static async Task<string> TaskTriggeredBySignal()
+    public async Task<string> TaskTriggeredBySignal()
     {
-        await Task.Delay(2000);
+        var duration = 2000;
+        _logger.LogInformation("Starting delay: {Duration}", duration);
+        await Task.Delay(duration);
+        _logger.LogInformation("Finished delay");
         return $"task-triggered-by-signal-{DateTime.Now}";
     }
 
     [Activity]
-    public static async Task<string> TaskTriggeredByTimeout()
+    public async Task<string> TaskTriggeredByTimeout()
     {
-        await Task.Delay(2000);
+        var duration = 2000;
+        _logger.LogInformation("Starting delay: {Duration}", duration);
+        await Task.Delay(duration);
+        _logger.LogInformation("Finished delay");
         return $"task-triggered-by-timeout-{DateTime.Now}";
     }
 }

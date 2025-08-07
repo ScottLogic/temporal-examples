@@ -6,6 +6,8 @@ services:
       dockerfile: temporal-worker/Dockerfile
     environment:
       - Temporal__ClientUrl=temporal:7233
+    volumes:
+      - ./logs:/app/logs
     depends_on:
       temporal:
         condition: service_healthy

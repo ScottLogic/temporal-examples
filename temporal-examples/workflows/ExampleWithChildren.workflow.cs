@@ -1,7 +1,7 @@
 using Temporalio.Common;
 using Temporalio.Workflows;
 
-namespace workflows;
+namespace Workflows;
 
 [Workflow]
 public class ExampleWithChildrenWorkflow
@@ -19,7 +19,7 @@ public class ExampleWithChildrenWorkflow
         };
 
         List<string> childNames = await Workflow.ExecuteActivityAsync(
-            () => ExampleActivities.GenerateChildWorkflowsName(),
+            (ExampleActivities a) => a.GenerateChildWorkflowsName(),
             new ActivityOptions
             {
                 StartToCloseTimeout = TimeSpan.FromMinutes(5),
@@ -34,6 +34,7 @@ public class ExampleWithChildrenWorkflow
                 new() { Id = child, TaskQueue = "example" }
             );
         }
+
         return "All child workflows created and run";
     }
 }
