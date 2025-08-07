@@ -48,11 +48,6 @@ namespace Shared.AutoFac.Modules
                 .Register<ILoggerFactory>(c => new SerilogLoggerFactory(logger, true))
                 .As<ILoggerFactory>()
                 .SingleInstance();
-
-            var services = new ServiceCollection();
-            services.AddLogging();
-
-            builder.Populate(services);
         }
     }
 }
