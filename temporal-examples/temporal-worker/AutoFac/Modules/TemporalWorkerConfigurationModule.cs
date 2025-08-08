@@ -2,14 +2,23 @@
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using OpenTelemetry;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using System.Diagnostics.Metrics;
+using System.Reflection;
+using Temporalio.Client;
+using Temporalio.Extensions.DiagnosticSource;
 using Temporalio.Extensions.Hosting;
-using Temporalio.Runtime;
 using Temporalio.Extensions.OpenTelemetry;
+using Temporalio.Runtime;
 using Workflows;
 
 namespace TemporalWorker.AutoFac.Modules
 {
-    public class TemporalWorkerConfigurationModule : Module
+    public class TemporalWorkerConfigurationModule : Autofac.Module
     {
         private readonly IConfiguration _configuration;
 
@@ -28,6 +37,10 @@ namespace TemporalWorker.AutoFac.Modules
             var clientNamespace = temporalConfig["Namespace"] ?? "default";
             var taskQueue = temporalConfig["TaskQueue"] ?? "example";
 
+            var assemblyName = typeof(TemporalClient).Assembly.GetName();
+
+            using var meter = new Meter(assemblyName.Name!, assemblyName.Version!.ToString());
+
             services
                 .AddTemporalClient(clientHost, clientNamespace)
                 .Configure(options =>
@@ -45,7 +58,21 @@ namespace TemporalWorker.AutoFac.Modules
                         }
                     );
 
+                    options.Runtime = new TemporalRuntime(
+                        new TemporalRuntimeOptions()
+                        {
+                            Telemetry = new TelemetryOptions()
+                            {
+                                Metrics = new MetricsOptions()
+                                {
+                                    CustomMetricMeter = new CustomMetricMeter(meter),
+                                },
+                            },
+                        }
+                    );
+
                     options.Interceptors = new[] { new TracingInterceptor() };
+
                 });
 
             var workerBuilder = services

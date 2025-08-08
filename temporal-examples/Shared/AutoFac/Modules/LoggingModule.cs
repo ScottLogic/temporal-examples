@@ -42,7 +42,7 @@ namespace Shared.AutoFac.Modules
                 );
 
             var logger = loggerConfig.CreateLogger();
-
+            
             Log.Logger = logger;
 
             builder.RegisterInstance(logger).As<Serilog.ILogger>().SingleInstance();

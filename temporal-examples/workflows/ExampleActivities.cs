@@ -15,6 +15,15 @@ public class ExampleActivities
     [Activity]
     public async Task<string> GenericTask()
     {
+        ActivityExecutionContext.Current.Logger.LogInformation(
+            "Executing activity for OpenTelemetry sample."
+        );
+        ActivityExecutionContext
+            .Current.MetricMeter.CreateCounter<int>(
+                "my-activity-counter",
+                description: "Counter used to instrument an activity."
+            )
+            .Add(123);
         var duration = 2000;
         _logger.LogInformation("Starting delay: {Duration}", duration);
         await Task.Delay(duration);

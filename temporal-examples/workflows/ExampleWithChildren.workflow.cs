@@ -18,6 +18,13 @@ public class ExampleWithChildrenWorkflow
             MaximumAttempts = 3,
         };
 
+        Workflow
+            .MetricMeter.CreateCounter<int>(
+                "my-workflow-counter",
+                description: "Replay-safe counter for instrumentation inside a workflow."
+            )
+            .Add(123);
+
         List<string> childNames = await Workflow.ExecuteActivityAsync(
             (ExampleActivities a) => a.GenerateChildWorkflowsName(),
             new ActivityOptions
