@@ -30,9 +30,6 @@ internal class Program
             )
             .Build();
 
-        // This can't live within autofac modules
-        var assemblyName = typeof(TemporalClient).Assembly.GetName();
-
         var resourceBuilder = ResourceBuilder
             .CreateDefault()
             .AddService("TemporalExamples.OpenTelemetry", serviceInstanceId: "temporal-worker");
