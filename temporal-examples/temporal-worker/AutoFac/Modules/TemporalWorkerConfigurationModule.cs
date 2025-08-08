@@ -39,8 +39,6 @@ namespace TemporalWorker.AutoFac.Modules
 
             var assemblyName = typeof(TemporalClient).Assembly.GetName();
 
-            using var meter = new Meter(assemblyName.Name!, assemblyName.Version!.ToString());
-
             services
                 .AddTemporalClient(clientHost, clientNamespace)
                 .Configure(options =>
@@ -53,19 +51,6 @@ namespace TemporalWorker.AutoFac.Modules
                                 Metrics = new()
                                 {
                                     Prometheus = new PrometheusOptions("0.0.0.0:9000"),
-                                },
-                            },
-                        }
-                    );
-
-                    options.Runtime = new TemporalRuntime(
-                        new TemporalRuntimeOptions()
-                        {
-                            Telemetry = new TelemetryOptions()
-                            {
-                                Metrics = new MetricsOptions()
-                                {
-                                    CustomMetricMeter = new CustomMetricMeter(meter),
                                 },
                             },
                         }

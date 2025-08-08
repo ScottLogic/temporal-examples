@@ -48,12 +48,6 @@ internal class Program
             .AddOtlpExporter(o => o.Endpoint = new Uri("http://host.docker.internal:4317"))
             .Build();
 
-        using var meterProvider = Sdk.CreateMeterProviderBuilder()
-            .SetResourceBuilder(resourceBuilder)
-            .AddMeter(assemblyName.Name!)
-            .AddOtlpExporter(o => o.Endpoint = new Uri("http://host.docker.internal:4317"))
-            .Build();
-
         await host.RunAsync();
     }
 }
