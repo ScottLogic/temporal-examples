@@ -9,6 +9,8 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" />
     <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="Microsoft.Extensions.Logging" />
+    <PackageReference Include="Serilog.Enrichers.OpenTelemetry" />
+    <PackageReference Include="Serilog.Enrichers.Span" />
     <PackageReference Include="Serilog.Extensions.Logging" />
     <PackageReference Include="Serilog.Sinks.Console" />
     <PackageReference Include="Serilog.Sinks.File" />

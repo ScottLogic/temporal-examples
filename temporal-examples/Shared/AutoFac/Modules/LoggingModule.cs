@@ -1,9 +1,9 @@
 using Autofac;
-using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Serilog.Enrichers.OpenTelemetry;
+using Serilog.Enrichers.Span;
 using Serilog.Extensions.Logging;
 using Serilog.Formatting.Json;
 
@@ -24,6 +24,9 @@ namespace Shared.AutoFac.Modules
         protected override void Load(ContainerBuilder builder)
         {
             var loggerConfig = new LoggerConfiguration()
+                .Enrich.WithSpan()
+                .Enrich.WithOpenTelemetryTraceId()
+                .Enrich.WithOpenTelemetrySpanId()
                 .Enrich.WithProperty(
                     "Environment",
                     Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"
