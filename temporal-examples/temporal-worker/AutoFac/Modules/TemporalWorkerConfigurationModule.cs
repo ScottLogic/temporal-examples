@@ -1,4 +1,6 @@
-﻿using Autofac;
+﻿using System.Diagnostics.Metrics;
+using System.Reflection;
+using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,8 +9,6 @@ using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
-using System.Diagnostics.Metrics;
-using System.Reflection;
 using Temporalio.Client;
 using Temporalio.Extensions.DiagnosticSource;
 using Temporalio.Extensions.Hosting;
@@ -72,7 +72,6 @@ namespace TemporalWorker.AutoFac.Modules
                     );
 
                     options.Interceptors = new[] { new TracingInterceptor() };
-
                 });
 
             var workerBuilder = services

@@ -39,10 +39,19 @@ namespace Shared.AutoFac.Modules
                     "logs/log-.json",
                     rollingInterval: RollingInterval.Day,
                     shared: true
-                );
+                )
+                .WriteTo.OpenTelemetry(options =>
+                {
+                    options.Endpoint = "http://host.docker.internal:4317"; // Use your OTLP endpoint
+                    options.Protocol = Serilog.Sinks.OpenTelemetry.OtlpProtocol.Grpc; // or .HttpProtobuf
+                    options.ResourceAttributes = new Dictionary<string, object>
+                    {
+                        ["service.name"] = "temporal-worker",
+                    };
+                });
 
             var logger = loggerConfig.CreateLogger();
-            
+
             Log.Logger = logger;
 
             builder.RegisterInstance(logger).As<Serilog.ILogger>().SingleInstance();

@@ -3,6 +3,7 @@ using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using OpenTelemetry;
+using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -30,7 +31,6 @@ internal class Program
             )
             .Build();
 
-
         // This can't live within autofac modules
         var assemblyName = typeof(TemporalClient).Assembly.GetName();
 
@@ -45,13 +45,13 @@ internal class Program
                 TracingInterceptor.WorkflowsSource.Name,
                 TracingInterceptor.ActivitiesSource.Name
             )
-            .AddOtlpExporter()
+            .AddOtlpExporter(o => o.Endpoint = new Uri("http://host.docker.internal:4317"))
             .Build();
 
         using var meterProvider = Sdk.CreateMeterProviderBuilder()
             .SetResourceBuilder(resourceBuilder)
             .AddMeter(assemblyName.Name!)
-            .AddOtlpExporter()
+            .AddOtlpExporter(o => o.Endpoint = new Uri("http://host.docker.internal:4317"))
             .Build();
 
         await host.RunAsync();
