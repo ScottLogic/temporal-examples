@@ -30,11 +30,13 @@ internal class Program
             )
             .Build();
 
+
+        // This can't live within autofac modules
         var assemblyName = typeof(TemporalClient).Assembly.GetName();
 
         var resourceBuilder = ResourceBuilder
             .CreateDefault()
-            .AddService("TemporalExamples.OpenTelemetry", serviceInstanceId: "example");
+            .AddService("TemporalExamples.OpenTelemetry", serviceInstanceId: "temporal-worker");
 
         using var tracerProvider = Sdk.CreateTracerProviderBuilder()
             .SetResourceBuilder(resourceBuilder)
