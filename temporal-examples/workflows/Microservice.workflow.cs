@@ -1,6 +1,5 @@
 using Temporalio.Common;
 using Temporalio.Workflows;
-using Workflows;
 
 namespace Workflows;
 

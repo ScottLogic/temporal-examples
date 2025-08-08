@@ -15,6 +15,9 @@ public class ExampleActivities
     [Activity]
     public async Task<string> GenericTask()
     {
+        ActivityExecutionContext.Current.Logger.LogInformation(
+            "Executing activity for OpenTelemetry sample."
+        );
         var duration = 2000;
         _logger.LogInformation("Starting delay: {Duration}", duration);
         await Task.Delay(duration);

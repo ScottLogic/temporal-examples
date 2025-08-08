@@ -19,3 +19,10 @@ scrape_configs:
           - host.docker.internal:9000
         labels:
           group: "worker-metrics"
+
+  - job_name: "microserviceworkermetrics"
+    static_configs:
+      - targets:
+          - host.docker.internal:9001
+        labels:
+          group: "worker-metrics"

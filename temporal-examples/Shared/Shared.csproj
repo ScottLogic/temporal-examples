@@ -9,10 +9,16 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" />
     <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="Microsoft.Extensions.Logging" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
+    <PackageReference Include="Serilog.Enrichers.OpenTelemetry" />
+    <PackageReference Include="Serilog.Enrichers.Span" />
     <PackageReference Include="Serilog.Extensions.Logging" />
     <PackageReference Include="Serilog.Sinks.Console" />
     <PackageReference Include="Serilog.Sinks.File" />
+    <PackageReference Include="Serilog.Sinks.OpenTelemetry" />
     <PackageReference Include="Temporalio" />
+    <PackageReference Include="Temporalio.Extensions.DiagnosticSource" />
+    <PackageReference Include="Temporalio.Extensions.OpenTelemetry" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AutoFac\" />
