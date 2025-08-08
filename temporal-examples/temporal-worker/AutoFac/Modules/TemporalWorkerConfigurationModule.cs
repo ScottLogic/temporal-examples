@@ -1,16 +1,8 @@
-﻿using System.Diagnostics.Metrics;
-using System.Reflection;
-using Autofac;
+﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using OpenTelemetry;
-using OpenTelemetry.Metrics;
-using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
 using Temporalio.Client;
-using Temporalio.Extensions.DiagnosticSource;
 using Temporalio.Extensions.Hosting;
 using Temporalio.Extensions.OpenTelemetry;
 using Temporalio.Runtime;
