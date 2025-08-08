@@ -28,5 +28,6 @@
     <PackageVersion Include="prometheus-net" Version="8.2.1" />
     <PackageVersion Include="Temporalio" Version="1.7.0" />
     <PackageVersion Include="Temporalio.Extensions.Hosting" Version="1.7.0" />
+    <PackageVersion Include="Temporalio.Extensions.OpenTelemetry" Version="1.7.0" />
   </ItemGroup>
 </Project>

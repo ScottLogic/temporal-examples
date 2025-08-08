@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Temporalio.Extensions.Hosting;
 using Temporalio.Runtime;
+using Temporalio.Extensions.OpenTelemetry;
 using Workflows;
 
 namespace TemporalWorker.AutoFac.Modules
@@ -43,6 +44,8 @@ namespace TemporalWorker.AutoFac.Modules
                             },
                         }
                     );
+
+                    options.Interceptors = new[] { new TracingInterceptor() };
                 });
 
             var workerBuilder = services
