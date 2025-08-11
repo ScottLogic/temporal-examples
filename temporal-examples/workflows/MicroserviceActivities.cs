@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using Temporalio.Activities;
 
 namespace Workflows;
@@ -7,30 +8,58 @@ namespace Workflows;
 // allow a separation.
 public class MicroserviceActivities
 {
-    [Activity]
-    public static async Task<bool> ValidateTransition(string transitionLocation)
+    private readonly ILogger<MicroserviceActivities> _logger;
+
+    public MicroserviceActivities(ILogger<MicroserviceActivities> logger)
     {
+        _logger = logger;
+    }
+
+    [Activity]
+    public async Task<bool> ValidateTransition(string transitionLocation)
+    {
+        var duration = 2000;
+        _logger.LogInformation("Starting delay: {Duration}", duration);
         await Task.Delay(1000);
+        _logger.LogInformation("Finished delay");
         return true;
     }
 
     [Activity]
-    public static async Task TransitionToApproved()
+    public async Task TransitionToApproved()
     {
+        ActivityExecutionContext.Current.Logger.LogInformation(
+            "Executing TransitionToApproved activity for OpenTelemetry sample."
+        );
+        var duration = 1500;
+        _logger.LogInformation("Starting delay: {Duration}", duration);
         await Task.Delay(1500);
+        _logger.LogInformation("Finished delay");
     }
 
     [Activity]
-    public static async Task<Result<string>> CreateSecondaryCosts()
+    public async Task<Result<string>> CreateSecondaryCosts()
     {
-        await Task.Delay(3000);
+        ActivityExecutionContext.Current.Logger.LogInformation(
+            "Executing CreateSecondaryCosts activity for OpenTelemetry sample."
+        );
+        var duration = 3000;
+        _logger.LogInformation("Starting delay: {Duration}", duration);
+        await Task.Delay(duration);
+        _logger.LogInformation("Finished delay");
         return new Result<string> { Value = "Created" };
     }
 
     [Activity]
-    public static async Task<Result<string>> UpdateUpstream()
+    public async Task<Result<string>> UpdateUpstream()
     {
-        await Task.Delay(5000);
+        ActivityExecutionContext.Current.Logger.LogInformation(
+            "Executing UpdateUpstream activity for OpenTelemetry sample."
+        );
+        var duration = 5000;
+        _logger.LogInformation("Starting delay: {Duration}", duration);
+        await Task.Delay(duration);
+        _logger.LogInformation("Finished delay");
         return new Result<string> { Value = "updated" };
     }
 

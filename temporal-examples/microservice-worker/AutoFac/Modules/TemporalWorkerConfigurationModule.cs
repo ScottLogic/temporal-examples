@@ -2,7 +2,9 @@
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Temporalio.Client;
 using Temporalio.Extensions.Hosting;
+using Temporalio.Extensions.OpenTelemetry;
 using Temporalio.Runtime;
 using Workflows;
 
@@ -29,6 +31,8 @@ namespace TemporalWorker.AutoFac.Modules
             // This is using a different queue to the other worker
             var taskQueue = temporalConfig["TaskQueue"] ?? "microservice-queue";
 
+            var assemblyName = typeof(TemporalClient).Assembly.GetName();
+
             services
                 .AddTemporalClient(clientHost, clientNamespace)
                 .Configure(options =>
@@ -45,6 +49,8 @@ namespace TemporalWorker.AutoFac.Modules
                             },
                         }
                     );
+
+                    options.Interceptors = [new TracingInterceptor()];
                 });
 
             var workerBuilder = services
