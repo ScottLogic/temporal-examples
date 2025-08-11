@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using Temporalio.Activities;
 
 namespace Workflows;
@@ -23,6 +24,9 @@ public class MicroserviceActivities
     [Activity]
     public static async Task<Result<string>> CreateSecondaryCosts()
     {
+        ActivityExecutionContext.Current.Logger.LogInformation(
+            "Executing activity for OpenTelemetry sample."
+        );
         await Task.Delay(3000);
         return new Result<string> { Value = "Created" };
     }
