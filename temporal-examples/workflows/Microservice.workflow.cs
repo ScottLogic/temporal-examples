@@ -30,7 +30,7 @@ public class MicroservicesWorkflow
         );
 
         bool result = await Workflow.ExecuteActivityAsync(
-            () => MicroserviceActivities.ValidateTransition("Transition to validate"),
+            (MicroserviceActivities a) => a.ValidateTransition("Transition to validate"),
             new ActivityOptions
             {
                 StartToCloseTimeout = TimeSpan.FromMinutes(5),
@@ -40,7 +40,7 @@ public class MicroservicesWorkflow
         );
 
         await Workflow.ExecuteActivityAsync(
-            () => MicroserviceActivities.CreateSecondaryCosts(),
+            (MicroserviceActivities a) => a.CreateSecondaryCosts(),
             new ActivityOptions
             {
                 StartToCloseTimeout = TimeSpan.FromMinutes(5),
@@ -50,7 +50,7 @@ public class MicroservicesWorkflow
         );
 
         var updateUpstream = Workflow.ExecuteActivityAsync(
-            () => MicroserviceActivities.UpdateUpstream(),
+            (MicroserviceActivities a) => a.UpdateUpstream(),
             new ActivityOptions
             {
                 StartToCloseTimeout = TimeSpan.FromMinutes(5),
@@ -60,7 +60,7 @@ public class MicroservicesWorkflow
         );
 
         var transitionToApproved = Workflow.ExecuteActivityAsync(
-            () => MicroserviceActivities.TransitionToApproved(),
+            (MicroserviceActivities a) => a.TransitionToApproved(),
             new ActivityOptions
             {
                 StartToCloseTimeout = TimeSpan.FromMinutes(5),
